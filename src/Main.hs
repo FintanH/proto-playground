@@ -1,5 +1,24 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Main where
+
+import Proto.Person as P
+import Proto.Person'Fields as P
+import Data.Default
+import Lens.Micro
+
+person :: P.Person
+person =
+  def & P.name      .~ "Fintan"
+      & P.age       .~ 24
+      & P.addresses .~ [address]
+  where
+    address :: P.Address
+    address =
+      def & P.street  .~ "Yolo street"
+          & P.zipCode .~ "D8"
+
 
 main :: IO ()
 main = do
-  putStrLn "hello world"
+  putStrLn . show $ person

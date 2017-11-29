@@ -38,6 +38,17 @@ resolver: lts-9.14
 packages:
 - .
 - proto
+
+- extra-dep: true
+  location:
+    git: https://github.com/google/proto-lens
+    commit: master
+  subdirs:
+    - proto-lens
+    - proto-lens-protobuf-types
+    - proto-lens-protoc
+    - lens-labels
+
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps: []
