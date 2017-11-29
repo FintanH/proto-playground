@@ -13,5 +13,5 @@ library:
     - proto-lens-protobuf-types
 
   exposed-modules:
-    Proto.Person
-    Proto.Person'Fields
+    - Proto.Person
+    - Proto.Person'Fields
