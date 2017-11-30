@@ -16,6 +16,7 @@ dependencies:
   - person-proto
   - data-default
   - microlens
+  - proto-lens
 
 executables:
   proto-playground:

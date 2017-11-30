@@ -5,6 +5,7 @@ module Main where
 import Proto.Person as P
 import Proto.Person'Fields as P
 import Data.Default
+import Data.ProtoLens (showMessage)
 import Lens.Micro
 
 person :: P.Person
@@ -21,4 +22,4 @@ person =
 
 main :: IO ()
 main = do
-  putStrLn . show $ person
+  putStrLn . showMessage $ person
