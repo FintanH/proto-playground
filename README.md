@@ -262,3 +262,17 @@ So we have our data types for Person and Address and they have instances for:
     -- | Every protocol buffer is an instance of 'Message'.  This class enables
     -- serialization by providing reflection of all of the fields that may be used
     -- by this type.
+
+### Building a Message
+
+Using your favourite lens library we can create our proto data by doing the following:
+
+```haskell
+import Proto.Person as P
+import Proto.Person'Fields as P
+
+fintan :: P.Person
+fintan = def & P.name      .~ "Fintan"  -- set the `name` of our person
+             & P.age       .~ 24        -- set the `age` of our person
+             & P.addresses .~ addresses -- set the `addresses` of our person
+```
