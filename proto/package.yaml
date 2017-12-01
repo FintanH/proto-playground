@@ -10,7 +10,6 @@ library:
     - base
     - proto-lens
     - proto-lens-protoc
-    - proto-lens-protobuf-types
 
   exposed-modules:
     - Proto.Person
