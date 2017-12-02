@@ -45,7 +45,6 @@ packages:
     commit: master
   subdirs:
     - proto-lens
-    - proto-lens-protobuf-types
     - proto-lens-protoc
     - lens-labels
 
