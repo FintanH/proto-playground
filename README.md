@@ -49,7 +49,6 @@ library:
     - base
     - proto-lens
     - proto-lens-protoc
-    - proto-lens-protobuf-types
 
   exposed-modules:
     - Proto.Person
@@ -87,7 +86,6 @@ packages:
     commit: master
   subdirs:
     - proto-lens
-    - proto-lens-protobuf-types
     - proto-lens-protoc
     - lens-labels
 ```
