@@ -24,21 +24,11 @@ message Coffee {
   float cost = 6;
 }
 
-
-message Americano {
-}
-
-message Latte {
-}
-
-message FlatWhite {
-}
-
-message Cappuccino {
-}
-
-message Mocha {
-}
+message Americano {}
+message Latte {}
+message FlatWhite {}
+message Cappuccino {}
+message Mocha {}
 
 message CardPayment {
   string pin = 1;
