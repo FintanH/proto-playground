@@ -17,8 +17,14 @@ dependencies:
   - data-default
   - microlens
   - proto-lens
+  - text
 
 executables:
   proto-playground:
     source-dirs:      src
     main:             Main.hs
+
+executables:
+  gimme-coffee:
+    source-dirs:      src
+    main:             CoffeeOrder.hs
