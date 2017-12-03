@@ -2,11 +2,13 @@
 syntax="proto3";
 
 message Order {
-  repeated Coffee coffees = 1;
+  float cost = 1;
+
+  repeated Coffee coffees = 2;
 
   oneof payment_method {
-    CardPayment card = 2;
-    CashPayment cash = 3;
+    CardPayment card = 3;
+    CashPayment cash = 4;
   }
 }
 
@@ -15,7 +17,7 @@ message Coffee {
     Americano americano = 1;
     Latte latte= 2;
     FlatWhite flat_white = 3;
-    Cappuccino cap= 4;
+    Cappuccino cappuccino = 4;
     Mocha mocha = 5;
   }
 

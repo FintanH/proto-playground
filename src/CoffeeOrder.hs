@@ -15,6 +15,7 @@ import qualified Proto.Coffee.Order'Fields as P
 data TransactionError
   = NotEnoughMoney
   | InvalidPin
+  | NotPreparedForThisPayment
 
 newtype PIN = PIN Text
   deriving (IsString)
@@ -24,30 +25,32 @@ showError NotEnoughMoney =
   "Sorry, you don't have enough money."
 showError InvalidPin =
   "Sorry, you entered your PIN wrong."
+showError NotPreparedForThisPayment =
+  "I'm just an intern!"
 
 americano :: P.Coffee
 americano =
-  def & P.cost .~ 2.70
+  def & P.cost      .~ 2.70
       & P.americano .~ def
 
 latte :: P.Coffee
 latte =
-  def & P.cost .~ 3.20
+  def & P.cost  .~ 3.20
       & P.latte .~ def
 
 flatWhite :: P.Coffee
 flatWhite =
-  def & P.cost .~ 3.30
+  def & P.cost      .~ 3.30
       & P.flatWhite .~ def
 
 cappuccino :: P.Coffee
 cappuccino =
-  def & P.cost .~ 3.00
-      & P.cap .~ def
+  def & P.cost       .~ 3.00
+      & P.cappuccino .~ def
 
 mocha :: P.Coffee
 mocha =
-  def & P.cost .~ 3.50
+  def & P.cost  .~ 3.50
       & P.mocha .~ def
 
 processCashPayment :: Float
@@ -55,7 +58,7 @@ processCashPayment :: Float
                    -> Either TransactionError ()
 processCashPayment amount payment
   | amount <= pay = pure ()
-  | amount > pay = Left NotEnoughMoney
+  | amount > pay  = Left NotEnoughMoney
   where
     pay = payment ^. P.amount
 
@@ -69,6 +72,7 @@ processCardPayment amount payment =
     pinCheck
       | account ^. P.pinValidation == payment ^. P.pin = pure ()
       | otherwise = Left InvalidPin
+
     balanceCheck
       | account ^. P.currentBalance >= amount = pure ()
       | otherwise = Left NotEnoughMoney
@@ -83,6 +87,7 @@ takeOrder amount order =
   case order ^. P.maybe'paymentMethod of
     Just (P.Order'Card card) -> processCardPayment amount card
     Just (P.Order'Cash cash) -> processCashPayment amount cash
+    _                        -> Left NotPreparedForThisPayment
 
 main :: IO ()
 main = do
@@ -90,7 +95,7 @@ main = do
   putStrLn "Two americanos and a flat white please :)"
 
   let order1Coffees = [americano, americano, flatWhite]
-      totalCost1 = totalCost order1Coffees
+      totalCost1    = totalCost order1Coffees
 
   putStrLn $ "That's €" ++ show totalCost1 ++ ". Will that be cash or card?"
   putStrLn "Cash, please"
@@ -98,8 +103,8 @@ main = do
   let order1 :: P.Order
       order1 =
         def & P.coffees .~ [americano, americano, flatWhite]
-            & P.cash .~ (def & P.amount .~ totalCost1)
+            & P.cash    .~ (def & P.amount .~ totalCost1)
 
   putStrLn $ case takeOrder totalCost1 order1 of
     Left err -> showError err
-    Right _ -> "Next, please!"
+    Right _  -> "Next, please!"
