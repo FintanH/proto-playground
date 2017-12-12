@@ -1,0 +1,1 @@
+# TODO: Explain why the Lens laws do not apply and anything else
