@@ -17,6 +17,7 @@ dependencies:
   - data-default
   - microlens
   - proto-lens
+  - lens-labels
   - text
 
 executables:
